@@ -3,18 +3,69 @@
 @tailwind utilities;
 
 .card {
-    width: 83%;
+  width: 83%;
 }
 
 .cardcontainer {
-    justify-content: center;
-    display: flex;
-    height: 100vh;
-    align-items: center;
-    flex-direction: column;
-    gap: 35px;
+  justify-content: center;
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  flex-direction: column;
+  gap: 35px;
 }
 
 .card > * {
-    margin-bottom: 16px;
+  margin-bottom: 16px;
+}
+
+/* 2nd page */
+
+.tasksfiltre {
+  justify-content: space-between;
+  display: flex;
+  margin-bottom: 25px;
+}
+
+.CARD {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.card2 {
+  background-color: #f0eefa;
+}
+
+.btn-next {
+  margin-top: 20px;
+  border-radius: 20px;
+}
+
+.nameNplate {
+  justify-content: space-between;
+  display: flex;
+}
+
+.timeNdate {
+  justify-content: space-between;
+  display: flex;
+}
+.cardInfo {
+  margin-bottom: 35px;
+  width: 83%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.container {
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 15rem;
+}
+
+.divContainer {
+  width: 83%;
 }
