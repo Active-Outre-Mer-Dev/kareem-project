@@ -69,3 +69,33 @@
 .divContainer {
   width: 83%;
 }
+
+/* Recap page */
+
+.recapCard {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.recap2 {
+  background-color: #f0eefa;
+}
+
+.rec-contain2 {
+  width: 83%;
+}
+
+.rec-contain {
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 15rem;
+}
+
+.recap {
+  margin-bottom: 30px;
+  font-size: 20px;
+  margin-left: 32%;
+}
