@@ -7,11 +7,13 @@ export default function Home() {
   const [step, setStep] = useState(0);
 
   const next = () => {
-    setStep(1);
+    if (step === 2) return;
+    setStep(prev => prev + 1);
   };
 
   const previous = () => {
-    setStep(0);
+    if (step === 1) return;
+    setStep(prev => prev - 1);
   };
 
   return (
@@ -70,6 +72,18 @@ export default function Home() {
                 Suivant
               </Button>
             </div>
+          </div>
+        </>
+      )}
+      {step === 2 && (
+        <>
+          <div className="flex gap-2">
+            <Button fullWidth size="sm" className="rounded-full mt-6">
+              Valider
+            </Button>
+            <Button variant={"neutral"} onClick={previous} fullWidth size="sm" className="rounded-full mt-6">
+              Retour
+            </Button>
           </div>
         </>
       )}
