@@ -25,6 +25,7 @@
   justify-content: space-between;
   display: flex;
   margin-bottom: 25px;
+  align-items: center;
 }
 
 .CARD {
@@ -35,6 +36,20 @@
 
 .card2 {
   background-color: #f0eefa;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 5px;
+}
+
+.card-description {
+  margin-left: 32px;
+  grid-column: span 2;
+  margin-top: 5px;
+}
+
+.card-description:has(input) {
+  display: flex;
+  gap: 10px;
 }
 
 .btn-next {

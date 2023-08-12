@@ -1,19 +1,21 @@
 "use client";
-import { TextInput, Card, Button, Checkbox, Select, ActionIcon } from "@aomdev/ui";
-import { IconPencil } from "@tabler/icons-react";
+import { TaskCard } from "@/components/task-card";
+import { TextInput, Card, Button, Checkbox, Select, ActionIcon, ThemeIcon } from "@aomdev/ui";
+import { IconPencil, IconCheck, IconPlus } from "@tabler/icons-react";
 import { useState } from "react";
+import { TaskList } from "@/components/task-list";
 
 export default function Home() {
   const [step, setStep] = useState(0);
 
   const next = () => {
     if (step === 2) return;
-    setStep((prev) => prev + 1);
+    setStep(prev => prev + 1);
   };
 
   const previous = () => {
     if (step === 1) return;
-    setStep((prev) => prev - 1);
+    setStep(prev => prev - 1);
   };
 
   return (
@@ -50,27 +52,7 @@ export default function Home() {
           </div>
           <div className="container">
             <div className="divContainer">
-              <div className="tasksfiltre">
-                <Select
-                  defaultValue="all"
-                  items={[
-                    { label: "Tout", value: "all" },
-                    { label: "Complété", value: "completed" },
-                    { label: "Interminé", value: "incomplete" }
-                  ]}
-                />
-                <span>3/5 tâches</span>
-              </div>
-              <div className="CARD">
-                <Card className="card2">Vérif pare-brise</Card>
-                <Card className="card2">Vérif pneus</Card>
-                <Card className="card2">Vérif rétroviseurs</Card>
-                <Card className="card2">Vérif portes</Card>
-                <Card className="card2">Vérif moteur</Card>
-              </div>
-              <Button onClick={next} fullWidth size="sm" className="rounded-full mt-6">
-                Suivant
-              </Button>
+              <TaskList onNext={next} />
             </div>
           </div>
         </>
