@@ -2,37 +2,16 @@
 
 import { useState } from "react";
 import { TaskCard } from "./task-card";
-import { ActionIcon, Button, Checkbox, Select } from "@aomdev/ui";
-import { IconCheck } from "@tabler/icons-react";
-
-const allTasks = [
-  {
-    title: "Vérif pneus",
-    checked: false,
-    description: ""
-  },
-  {
-    title: "Vérif rétroviseurs",
-    checked: false,
-    description: ""
-  },
-  {
-    title: "Vérif portes",
-    checked: false,
-    description: ""
-  },
-  {
-    title: "Vérif moteur",
-    checked: false,
-    description: ""
-  }
-];
+import { Button, Checkbox, Select } from "@aomdev/ui";
+import { AllTasks } from "@/app/page";
 
 type PropTypes = {
   onNext: () => void;
+  allTasks: AllTasks;
+  onTasks: (tasks: AllTasks) => void;
 };
 
-export function TaskList({ onNext }: PropTypes) {
+export function TaskList({ onNext, allTasks, onTasks }: PropTypes) {
   const [tasks, setTasks] = useState(allTasks);
   const [filter, setFilter] = useState("all");
 
@@ -53,7 +32,22 @@ export function TaskList({ onNext }: PropTypes) {
     setTasks(newTasks);
   };
 
+  const onDescription = (title: string, description: string) => {
+    const newTasks = tasks.map(task => {
+      return {
+        ...task,
+        description: title === task.title ? description : task.description
+      };
+    });
+    setTasks(newTasks);
+  };
+
   const completed = tasks.filter(task => task.checked);
+
+  const onComplete = () => {
+    onNext();
+    onTasks(tasks);
+  };
 
   return (
     <>
@@ -74,7 +68,12 @@ export function TaskList({ onNext }: PropTypes) {
       <div className="CARD">
         {filteredTasks.map((task, index) => {
           return (
-            <TaskCard key={index} description={task.description} title={task.title}>
+            <TaskCard
+              key={index}
+              description={task.description}
+              title={task.title}
+              onDescription={onDescription}
+            >
               <Checkbox
                 checked={task.checked}
                 onCheckedChange={() => onToggle(task.title)}
@@ -83,21 +82,13 @@ export function TaskList({ onNext }: PropTypes) {
                 style={{ borderRadius: "50%" }}
                 className="rounded-full"
               />
-              {/* <ActionIcon
-                onClick={() => onToggle(task.title)}
-                className={`${
-                  task.checked ? "bg-primary-600" : "bg-white ring-1 ring-neutral-100"
-                } text-white `}
-              >
-                {task.checked ? <IconCheck size={"75%"} /> : null}
-              </ActionIcon> */}
             </TaskCard>
           );
         })}
       </div>
       <Button
         disabled={completed.length !== tasks.length}
-        onClick={onNext}
+        onClick={onComplete}
         fullWidth
         size="sm"
         className="rounded-full mt-6"

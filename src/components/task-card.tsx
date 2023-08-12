@@ -7,15 +7,15 @@ type PropTypes = {
   children: React.ReactNode;
   description?: string;
   title: string;
+  onDescription: (title: string, desc: string) => void;
 };
 
-export function TaskCard({ children, description, title }: PropTypes) {
+export function TaskCard({ children, description, title, onDescription }: PropTypes) {
   const [edit, setEdit] = useState(false);
-  const [feedback, setFeedback] = useState(description || "");
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     const formData = new FormData(e.currentTarget);
-    setFeedback(formData.get("feedback")?.toString() || "");
+    onDescription(title, formData.get("feedback")?.toString() || "");
     setEdit(false);
   };
 
@@ -29,18 +29,24 @@ export function TaskCard({ children, description, title }: PropTypes) {
       </div>
       <div className="flex justify-end">
         <ActionIcon onClick={() => setEdit(prev => !prev)}>
-          {edit ? <IconX size={"75%"} /> : feedback ? <IconPencil size={"75%"} /> : <IconPlus size={"75%"} />}
+          {edit ? (
+            <IconX size={"75%"} />
+          ) : description ? (
+            <IconPencil size={"75%"} />
+          ) : (
+            <IconPlus size={"75%"} />
+          )}
         </ActionIcon>
       </div>
       {edit ? (
         <form className="card-description" onSubmit={onSubmit}>
           <div className="bg-white rounded-md">
-            <TextInput autoFocus size={"sm"} name="feedback" id="feedback" defaultValue={feedback} />
+            <TextInput autoFocus size={"sm"} name="feedback" id="feedback" defaultValue={description} />
           </div>
           <Button size={"sm"}>Submit</Button>
         </form>
-      ) : feedback ? (
-        <p className="card-description text-gray-600 text-sm">{feedback}</p>
+      ) : description ? (
+        <p className="card-description text-gray-600 text-sm">{description}</p>
       ) : null}
     </Card>
   );
