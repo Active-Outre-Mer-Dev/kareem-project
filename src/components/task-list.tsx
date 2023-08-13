@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { TaskCard } from "./task-card";
 import { Button, Checkbox, Select } from "@aomdev/ui";
-import { AllTasks } from "@/app/page";
+import { AllTasks } from "./tasks-container";
 
 type PropTypes = {
   onNext: () => void;

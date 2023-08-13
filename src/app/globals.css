@@ -71,10 +71,11 @@
   display: flex;
 }
 .cardInfo {
-  margin-bottom: 35px;
   width: 83%;
-  margin-left: auto;
-  margin-right: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .container {
@@ -82,7 +83,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 15rem;
+  margin-top: 10rem;
 }
 
 .divContainer {
@@ -103,14 +104,6 @@
 
 .rec-contain2 {
   width: 83%;
-}
-
-.rec-contain {
-  justify-content: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 15rem;
 }
 
 .recap {
