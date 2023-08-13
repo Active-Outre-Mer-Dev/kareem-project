@@ -75,8 +75,8 @@ export function TasksContainer() {
             <div className="rec-contain2">
               <h1 className="recap font-heading font-medium">Récapitulatif</h1>
               <div className="recapCard">
-                {tasks.map(task => {
-                  return <SummaryCard title={task.title} description={task.description} />;
+                {tasks.map((task, index) => {
+                  return <SummaryCard key={index} title={task.title} description={task.description} />;
                 })}
               </div>
 
