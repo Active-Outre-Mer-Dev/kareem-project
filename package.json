@@ -10,7 +10,7 @@
     "supabase:gen": "supabase gen types typescript --linked > src/types/database.types.ts --schema public"
   },
   "dependencies": {
-    "@aomdev/ui": "^0.2.2",
+    "@aomdev/ui": "^0.3.0",
     "@supabase/supabase-js": "^2.32.0",
     "@tabler/icons-react": "^2.30.0",
     "next": "13.4.13",

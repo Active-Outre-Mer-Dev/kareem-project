@@ -1,7 +1,7 @@
 "use client";
 import { useReducer, useState, useTransition } from "react";
 import { SummaryCard } from "./summary-card";
-import { Button, Checkbox, Select } from "@aomdev/ui";
+import { Button, Select, Checkbox } from "@aomdev/ui";
 import { IconLoader2 } from "@tabler/icons-react";
 import { TaskCard } from "./task-card";
 import { initialState, reducer } from "./check-reducer";
@@ -101,12 +101,11 @@ export function TasksContainer({ allTasks, defaultComplete, id, children, licens
                     }
                   >
                     <Checkbox
+                      radius={"full"}
                       checked={check.checked}
                       onCheckedChange={() => dispatch({ type: "check", id: check.id })}
                       id={`${check.name}-checkbox`}
                       name={check.name || ""}
-                      style={{ borderRadius: "50%" }}
-                      className="rounded-full"
                     />
                   </TaskCard>
                 );
