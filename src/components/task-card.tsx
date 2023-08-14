@@ -5,17 +5,18 @@ import { FormEvent, useState } from "react";
 
 type PropTypes = {
   children: React.ReactNode;
-  description?: string;
+  taskDescription?: string;
   title: string;
-  onDescription: (title: string, desc: string) => void;
+  id: number;
+  onDescription: (id: number, desc: string) => void;
 };
 
-export function TaskCard({ children, description, title, onDescription }: PropTypes) {
+export function TaskCard({ children, taskDescription, title, onDescription, id }: PropTypes) {
   const [edit, setEdit] = useState(false);
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
     const formData = new FormData(e.currentTarget);
-    onDescription(title, formData.get("feedback")?.toString() || "");
+    onDescription(id, formData.get("feedback")?.toString() || "");
     setEdit(false);
   };
 
@@ -31,7 +32,7 @@ export function TaskCard({ children, description, title, onDescription }: PropTy
         <ActionIcon onClick={() => setEdit(prev => !prev)}>
           {edit ? (
             <IconX size={"75%"} />
-          ) : description ? (
+          ) : taskDescription ? (
             <IconPencil size={"75%"} />
           ) : (
             <IconPlus size={"75%"} />
@@ -41,12 +42,12 @@ export function TaskCard({ children, description, title, onDescription }: PropTy
       {edit ? (
         <form className="card-description" onSubmit={onSubmit}>
           <div className="bg-white rounded-md">
-            <TextInput autoFocus size={"sm"} name="feedback" id="feedback" defaultValue={description} />
+            <TextInput autoFocus size={"sm"} name="feedback" id="feedback" defaultValue={taskDescription} />
           </div>
           <Button size={"sm"}>Submit</Button>
         </form>
-      ) : description ? (
-        <p className="card-description text-gray-600 text-sm">{description}</p>
+      ) : taskDescription ? (
+        <p className="card-description text-gray-600 text-sm">{taskDescription}</p>
       ) : null}
     </Card>
   );

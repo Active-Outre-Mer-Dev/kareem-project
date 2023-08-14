@@ -1,2 +1,2 @@
 "use client";
-export { Checkbox } from "@aomdev/ui";
+export { Checkbox, Select } from "@aomdev/ui";

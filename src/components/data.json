@@ -1,0 +1,24 @@
+{
+  "data": [
+    {
+      "title": "Vérif pneus",
+      "checked": false,
+      "description": ""
+    },
+    {
+      "title": "Vérif rétroviseurs",
+      "checked": false,
+      "description": ""
+    },
+    {
+      "title": "Vérif portes",
+      "checked": false,
+      "description": ""
+    },
+    {
+      "title": "Vérif moteur",
+      "checked": false,
+      "description": ""
+    }
+  ]
+}
