@@ -1,37 +1,30 @@
-import { TasksContainer } from "@/components/tasks-container";
-import { notFound } from "next/navigation";
 import { SuccessCard } from "@/components/success-card";
-import { UserCardContainer } from "@/components/user-card-container";
-import { fetchUserList } from "@/lib/fetch-car";
+import { TasksContainer } from "@/components/tasks-container";
+import { UserCard } from "@/components/user-card";
+import { cars } from "@/lib/car";
+import { cookies as nextCookies } from "next/headers";
+import { notFound } from "next/navigation";
 
-export const runtime = "edge";
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
-export default async function Page({ params }: { params: { id: string } }) {
-  const { data, error } = await fetchUserList(params.id);
-  if (error) notFound();
-  const defaultComplete = data.user_checks.every(check => check.checked);
-  const allTasks = data.user_checks.slice().sort((a, b) => {
-    if (a.name < b.name) {
-      return -1;
-    } else if (a.name > b.name) {
-      return 1;
-    } else {
-      return 0;
-    }
-  });
+export default function Page({ params }: { params: { id: string } }) {
+  const cookies = nextCookies();
+  const rememberMe = cookies.get("rememberMe") || null;
 
+  let firstName = "";
+  let lastName = "";
+
+  firstName = cookies.get("firstName")?.value || "";
+  lastName = cookies.get("lastName")?.value || "";
+
+  const car = cars.find(car => car.id === params.id);
+  if (!car) notFound();
   return (
     <>
-      <UserCardContainer listId={params.id} />
-      <TasksContainer
-        id={params.id}
-        allTasks={allTasks}
-        defaultComplete={defaultComplete}
-        licensePlate={data.license_plate}
-      >
-        <SuccessCard licensePlate={data.license_plate} listId={params.id} />
+      <UserCard lastName={lastName} firstName={firstName} {...car} />
+      <TasksContainer id={params.id} licensePlate={"405-AAC"}>
+        <SuccessCard car={car} firstName={firstName} lastName={lastName} />
       </TasksContainer>
     </>
   );

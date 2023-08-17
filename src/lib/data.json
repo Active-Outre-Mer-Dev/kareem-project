@@ -1,0 +1,100 @@
+{
+  "data": [
+    {
+      "name": "Engine Oil",
+      "id": "30294",
+      "checked": false,
+      "description": "",
+      "conditions": [
+        {
+          "label": "Low",
+          "value": "bad"
+        },
+        {
+          "label": "Correct",
+          "value": "good"
+        }
+      ]
+    },
+    {
+      "name": "Coolant Level",
+      "id": "3029",
+      "checked": false,
+      "description": "",
+      "conditions": [
+        {
+          "label": "Low",
+          "value": "bad"
+        },
+        {
+          "label": "Correct",
+          "value": "good"
+        }
+      ]
+    },
+    {
+      "name": "Gas Level",
+      "id": "394",
+      "checked": false,
+      "description": "",
+      "conditions": [
+        {
+          "label": "Low",
+          "value": "bad"
+        },
+        {
+          "label": "Correct",
+          "value": "good"
+        }
+      ]
+    },
+    {
+      "name": "Tire condition",
+      "id": "302294",
+      "checked": false,
+      "description": "",
+      "conditions": [
+        {
+          "label": "Worn",
+          "value": "bad"
+        },
+        {
+          "label": "Good condition",
+          "value": "good"
+        }
+      ]
+    },
+    {
+      "name": "Tire air",
+      "id": "3029459",
+      "checked": false,
+      "description": "",
+      "conditions": [
+        {
+          "label": "Low",
+          "value": "bad"
+        },
+        {
+          "label": "Correct",
+          "value": "good"
+        }
+      ]
+    },
+    {
+      "name": "Power fluid",
+      "id": "3029454",
+      "checked": false,
+      "description": "",
+      "conditions": [
+        {
+          "label": "Low",
+          "value": "bad"
+        },
+        {
+          "label": "Correct",
+          "value": "good"
+        }
+      ]
+    }
+  ]
+}

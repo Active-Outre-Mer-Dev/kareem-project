@@ -33,21 +33,8 @@ export function CheckListForm({ items, defaultFirstName, defaultLastName, rememb
     const lastName = formData.get("last_name")?.toString() || "";
     const licensePlate = formData.get("license_plate")?.toString() || "";
     const rememberMe = formData.get("remember_me")?.toString() || "";
-    let currentCar: CarRelation | null = null;
 
-    for (const car of data) {
-      if (car.license_plate === licensePlate) currentCar = car as CarRelation;
-    }
-
-    const res = await fetch("/api/user-check-list", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ firstName, lastName, rememberMe: rememberMe === "on", currentCar, licensePlate })
-    });
-    if (res.ok) {
-      const json = await res.json();
-      router.push(`/${json.data}`);
-    }
+    router.push(`/${licensePlate}`);
   };
 
   return (

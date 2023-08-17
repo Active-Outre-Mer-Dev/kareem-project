@@ -10,27 +10,13 @@ type PropTypes = {
   firstName: string;
   lastName: string;
   licensePlate: string;
-  createdAt: string;
   lastChecked: string | null;
   model: string;
 };
 
-export function UserCard({ firstName, lastName, licensePlate, model, createdAt, lastChecked }: PropTypes) {
+export function UserCard({ firstName, lastName, licensePlate, model, lastChecked }: PropTypes) {
   const formatter = new Intl.DateTimeFormat("fr", { dateStyle: "short", timeStyle: "short" });
   const [open, setOpen] = useState(false);
-  const [copied, setCopied] = useState(false);
-  const timer = useRef<NodeJS.Timer>();
-
-  const onCopy = async (e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
-    e.stopPropagation();
-    clearTimeout(timer.current);
-    timer.current = undefined;
-    await navigator.clipboard.writeText(window.location.href);
-    setCopied(true);
-    timer.current = setTimeout(() => {
-      setCopied(false);
-    }, 2500);
-  };
 
   return (
     <div
@@ -42,12 +28,6 @@ export function UserCard({ firstName, lastName, licensePlate, model, createdAt, 
       <Card className="cardInfo">
         {!open ? (
           <>
-            <div className="flex justify-between">
-              <p className="text-sm text-gray-600 font-medium">{formatter.format(new Date(createdAt))}</p>
-              <ActionIcon onClick={onCopy}>
-                {copied ? <IconCheck size={"75%"} /> : <IconCopy size={"75%"} />}
-              </ActionIcon>
-            </div>
             <div className="flex justify-between">
               <p className="font-medium text-gray-800">
                 {firstName} {lastName}
@@ -61,7 +41,7 @@ export function UserCard({ firstName, lastName, licensePlate, model, createdAt, 
               <span className="font-medium text-gray-800">
                 {firstName} {lastName}
               </span>
-              <span className="text-gray-600">{formatter.format(new Date(createdAt))}</span>
+              {/* <span className="text-gray-600">{formatter.format(new Date(createdAt))}</span> */}
             </div>
             <figure className="mb-4 border-b border-neutral-100 space-y-4">
               <Image src={car} alt="" />

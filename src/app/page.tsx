@@ -1,19 +1,10 @@
 import { cookies as nextCookies } from "next/headers";
-import { createClient } from "@supabase/supabase-js";
-import { Database } from "@/types/database.types";
-import { CheckListForm } from "@/components/check-list-form";
-
-const supabase = createClient<Database>(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_KEY!,
-  {
-    global: { fetch: fetch.bind(globalThis) },
-    auth: { persistSession: false }
-  }
-);
+import { cars } from "@/lib/car";
+import { Button, Card, TextInput } from "@aomdev/ui";
+import { Checkbox, Select } from "./_components/client";
+import { redirect } from "next/navigation";
 
 export default async function Home() {
-  const { data, error } = await supabase.from("cars").select("*, car_checks (car_license_plate, name, id)");
   const cookies = nextCookies();
   const rememberMe = cookies.get("rememberMe") || null;
 
@@ -25,21 +16,56 @@ export default async function Home() {
     lastName = cookies.get("lastName")?.value || "";
   }
 
-  const plates = error
-    ? []
-    : data.map(({ license_plate }) => ({ label: license_plate, value: license_plate }));
+  const formSubmit = async (data: FormData) => {
+    "use server";
+    const cookies = nextCookies();
+    const remember = data.get("remember_me")?.toString() || "";
+    const firstName = data.get("first_name")?.toString() || "";
+    const lastName = data.get("last_name")?.toString() || "";
+    const licensePlate = data.get("license_plate")?.toString() || "";
+
+    const cookieOptions = { httpOnly: true, maxAge: 60 * 60 * 24 * 3 };
+    if (remember === "on") {
+      cookies.set("firstName", firstName, cookieOptions);
+      cookies.set("lastName", lastName, cookieOptions);
+      cookies.set("rememberMe", "on", cookieOptions);
+    } else {
+      cookies.set("firstName", firstName);
+      cookies.set("lastName", lastName);
+      cookies.set("rememberMe", "");
+    }
+    redirect(`/${licensePlate}`);
+  };
+
+  const plates = cars.map(car => ({ label: car.licensePlate, value: car.id }));
   return (
     <>
       <>
         <div className="cardcontainer">
           <h1 className="font-heading font-medium text-3xl">Connexion</h1>
-          <CheckListForm
-            data={data || []}
-            defaultFirstName={firstName}
-            defaultLastName={lastName}
-            items={plates}
-            rememberMe={rememberMe?.value === "on"}
-          />
+          <Card className="card">
+            <form className="space-y-4" action={formSubmit}>
+              <TextInput label="Nom" defaultValue={firstName} required name="first_name" />
+              <TextInput label="Prénom" defaultValue={lastName} required name="last_name" />
+
+              <Select
+                items={plates}
+                placeholder="Select license plate"
+                fullWidth
+                name="license_plate"
+                required
+              />
+              <Checkbox
+                defaultChecked={rememberMe?.value === "on"}
+                label="Se souvenir de moi"
+                name="remember_me"
+              />
+
+              <Button fullWidth size="sm" className="rounded-full mt-6">
+                Suivant
+              </Button>
+            </form>
+          </Card>
         </div>
       </>
     </>

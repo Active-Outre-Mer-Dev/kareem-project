@@ -6,14 +6,19 @@ import { useState } from "react";
 type PropTypes = {
   title: string;
   description?: string;
+  condition: string;
 };
 
-export function SummaryCard({ description, title }: PropTypes) {
+export function SummaryCard({ description, title, condition }: PropTypes) {
   const [open, setOpen] = useState(false);
   return (
     <Card className="card2 ring-0">
       <div className="flex gap-2 items-center">
-        <span className="h-2 w-2 inline-block bg-primary-600 rounded-full"></span>
+        <span
+          className={`h-2 w-2 inline-block ${
+            condition === "good" ? "bg-success-500" : condition === "medium" ? "bg-warn-500" : "bg-error-500"
+          } rounded-full`}
+        ></span>
         <p className="text-lg ">{title}</p>
       </div>
       <div className="flex justify-end items-center">
@@ -23,7 +28,7 @@ export function SummaryCard({ description, title }: PropTypes) {
       </div>
       {open ? (
         <p className="card-description-2 text-sm text-gray-600">
-          {description || "Dolore nisi pariatur pariatur qui ea."}
+          {description || "No additional information provided."}
         </p>
       ) : null}
     </Card>

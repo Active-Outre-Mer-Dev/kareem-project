@@ -47,11 +47,6 @@
   margin-top: 5px;
 }
 
-.card-description:has(input) {
-  display: flex;
-  gap: 10px;
-}
-
 .card-description-2 {
   margin-left: 16px;
 }
