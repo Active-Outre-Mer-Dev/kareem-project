@@ -3,6 +3,7 @@ import { cars } from "@/lib/car";
 import { Button, Card, TextInput } from "@aomdev/ui";
 import { Checkbox, Select } from "./_components/client";
 import { redirect } from "next/navigation";
+import json from "@/lib/data.json";
 
 export default async function Home() {
   const cookies = nextCookies();
@@ -37,7 +38,7 @@ export default async function Home() {
     redirect(`/${licensePlate}`);
   };
 
-  const plates = cars.map(car => ({ label: car.licensePlate, value: car.id }));
+  const plates = json.cars.map(car => ({ label: car.licensePlate, value: car.id }));
   return (
     <>
       <>

@@ -1,100 +1,113 @@
 {
-  "data": [
+  "cars": [
     {
-      "name": "Engine Oil",
-      "id": "30294",
+      "model": "Tesla Model S",
+      "licensePlate": "4053-AAC",
+      "passengers": 5,
+      "gas": "electric",
+      "gear": "automatic",
+      "id": "2cf1c1ed-fb52-49e1-bcc5-f38a4e5d8e57",
+      "lastChecked": "Thu Aug 17 2023"
+    },
+    {
+      "model": "Nissan Skyline",
+      "licensePlate": "4553-AAB",
+      "passengers": 4,
+      "gas": "gasoline",
+      "gear": "manual",
+      "id": "012dbe95-0683-41c9-aef4-0070784b4150",
+      "lastChecked": "Thu Aug 17 2023"
+    }
+  ],
+  "checks": [
+    {
+      "name": "Gas Fluid",
+      "conditions": [
+        { "label": "Good", "value": "good" },
+        { "label": "Low", "value": "bad" }
+      ],
       "checked": false,
       "description": "",
+      "condition": "",
+      "id": "9c82d27e-d7bb-4a2f-aaaf-4927ea8587d6"
+    },
+    {
+      "name": "Engine Oil Level",
       "conditions": [
-        {
-          "label": "Low",
-          "value": "bad"
-        },
-        {
-          "label": "Correct",
-          "value": "good"
-        }
-      ]
+        { "label": "Good", "value": "good" },
+        { "label": "Low", "value": "bad" }
+      ],
+      "checked": false,
+      "description": "",
+      "condition": "",
+      "id": "a7e0cfdf-2b78-4e11-ae7f-95b2fc0fe17e"
     },
     {
       "name": "Coolant Level",
-      "id": "3029",
+      "conditions": [
+        { "label": "Good", "value": "good" },
+        { "label": "Low", "value": "bad" }
+      ],
       "checked": false,
       "description": "",
-      "conditions": [
-        {
-          "label": "Low",
-          "value": "bad"
-        },
-        {
-          "label": "Correct",
-          "value": "good"
-        }
-      ]
+      "condition": "",
+      "id": "d6feb65f-d22e-4246-ac8e-21e82357292c"
     },
     {
-      "name": "Gas Level",
-      "id": "394",
+      "name": "Brake Fluid Level",
+      "conditions": [
+        { "label": "Good", "value": "good" },
+        { "label": "Low", "value": "bad" }
+      ],
       "checked": false,
       "description": "",
-      "conditions": [
-        {
-          "label": "Low",
-          "value": "bad"
-        },
-        {
-          "label": "Correct",
-          "value": "good"
-        }
-      ]
+      "condition": "",
+      "id": "22b8cc6a-60f0-45d6-b04b-03460e9c6896"
     },
     {
-      "name": "Tire condition",
-      "id": "302294",
+      "name": "Power Steering Level",
+      "conditions": [
+        { "label": "Good", "value": "good" },
+        { "label": "Low", "value": "bad" }
+      ],
       "checked": false,
       "description": "",
-      "conditions": [
-        {
-          "label": "Worn",
-          "value": "bad"
-        },
-        {
-          "label": "Good condition",
-          "value": "good"
-        }
-      ]
+      "condition": "",
+      "id": "5c9b1cd5-83e9-4513-8b81-cf687277a6dc"
     },
     {
-      "name": "Tire air",
-      "id": "3029459",
+      "name": "Tire Condition",
+      "conditions": [
+        { "label": "Worn", "value": "medium" },
+        { "label": "Severly Worn", "value": "bad" }
+      ],
       "checked": false,
       "description": "",
-      "conditions": [
-        {
-          "label": "Low",
-          "value": "bad"
-        },
-        {
-          "label": "Correct",
-          "value": "good"
-        }
-      ]
+      "condition": "",
+      "id": "5185b07c-2816-4d7b-8c12-48ebc41e2974"
     },
     {
-      "name": "Power fluid",
-      "id": "3029454",
+      "name": "Tire Pressure",
+      "conditions": [
+        { "label": "Good", "value": "good" },
+        { "label": "Low", "value": "bad" }
+      ],
       "checked": false,
       "description": "",
+      "condition": "",
+      "id": "5a22bfc9-5c76-4614-9a42-2a6074463a91"
+    },
+    {
+      "name": "Rims Condition",
       "conditions": [
-        {
-          "label": "Low",
-          "value": "bad"
-        },
-        {
-          "label": "Correct",
-          "value": "good"
-        }
-      ]
+        { "label": "Good condition", "value": "good" },
+        { "label": "Damaged", "value": "medium" },
+        { "label": "Severly Damaged", "value": "bad" }
+      ],
+      "checked": false,
+      "description": "",
+      "condition": "",
+      "id": "15d7bfd9-a012-476b-825e-6cacfbe5f9a0"
     }
   ]
 }
