@@ -29,19 +29,9 @@ export function SuccessCard({ car, firstName, lastName }: PropTypes) {
             <span className="font-medium text-lg text-gray-900">{car.model}</span>
             <span className="text-gray-700">{car.licensePlate}</span>
           </div>
-          {/* {data.last_checked ? (
-            <span className="text-sm text-gray-600">
-              Last checked on {formatter.format(new Date(data.last_checked))}
-            </span>
-          ) : ( */}
-          <span className="text-sm text-gray-600">No checks</span>
-          {/* )} */}
         </figcaption>
       </figure>
       <h1 className="text-xl font-heading font-medium text-center mb-2">Email sent!</h1>
-      <p className="text-center leading-relaxed mb-4">
-        Pariatur in et ipsum fugiat sunt laborum ullamco eu non ullamco officia.
-      </p>
       <Link href={"/"} className={buttonStyles({ size: "sm" })}>
         Another one
       </Link>

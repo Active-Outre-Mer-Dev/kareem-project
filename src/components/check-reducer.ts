@@ -1,11 +1,12 @@
 import { Check } from "@/lib/check";
 
 type Actions =
-  | { type: "description"; payload: { id: string; description: string } }
   | { type: "check"; payload: { id: string; condition: string } }
   | { type: "filter"; payload: string }
   | { type: "step"; payload: State["step"] }
-  | { type: "condition"; payload: { condition: string; id: string } };
+  | { type: "condition"; payload: { condition: string; id: string } }
+  | { type: "person"; payload: { person: "boss" | "mechanic"; id: string } }
+  | { type: "resolved"; payload: { id: string; resolved: boolean } };
 
 type State = {
   isComplete: boolean;
@@ -49,31 +50,34 @@ export function reducer(state: typeof initialState, action: Actions): State {
       };
     }
 
-    case "description": {
-      const newChecks = state.checks.map(task => {
-        return {
-          ...task,
-          description: task.id === action.payload.id ? action.payload.description : task.description
-        };
-      });
-      return { ...state, checks: newChecks };
-    }
     case "filter": {
-      console.log(action.payload);
       return { ...state, filter: action.payload };
     }
     case "step": {
-      // if (action.payload === "summary") {
-      //   fetch("/api/user_checks", {
-      //     method: "PUT",
-      //     headers: { "Content-Type": "application/json" },
-      //     body: JSON.stringify({ data: state.checks })
-      //   });
-      // }
       return {
         ...state,
         step: action.payload
       };
+    }
+    case "person": {
+      const newChecks = state.checks.map(check => ({
+        ...check,
+        notification:
+          check.id === action.payload.id
+            ? { ...check.notification, person: action.payload.person }
+            : check.notification
+      }));
+      return { ...state, checks: newChecks };
+    }
+    case "resolved": {
+      const newChecks = state.checks.map(check => ({
+        ...check,
+        notification:
+          check.id === action.payload.id
+            ? { ...check.notification, resolved: action.payload.resolved }
+            : check.notification
+      }));
+      return { ...state, checks: newChecks };
     }
 
     default: {

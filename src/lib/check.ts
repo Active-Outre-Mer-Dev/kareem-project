@@ -5,14 +5,13 @@ type Condition = {
 
 export class Check {
   checked: false;
-  description: string;
   condition: string;
   id: string;
+  notification?: Partial<{ person: "boss" | "mechanic"; resolved: boolean }>;
   constructor(public name: string, public conditions: Condition[]) {
     this.name = name;
     this.conditions = conditions;
     this.checked = false;
-    this.description = "";
     this.condition = "";
     this.id = crypto.randomUUID();
   }
@@ -31,6 +30,7 @@ const coolantLevel = new Check("Coolant Level", defaultCondition());
 const brakeFluid = new Check("Brake Fluid Level", defaultCondition());
 const powerSteering = new Check("Power Steering Level", defaultCondition());
 const tireCondition = new Check("Tire Condition", [
+  { label: "Good Condition", value: "good" },
   { label: "Worn", value: "medium" },
   { label: "Severly Worn", value: "bad" }
 ]);

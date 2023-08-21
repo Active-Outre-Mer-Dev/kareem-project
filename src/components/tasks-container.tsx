@@ -22,10 +22,6 @@ function filterChecks(filter: string, checks: Check[]) {
     : checks;
 }
 
-async function sleep() {
-  return await new Promise(res => setTimeout(res, 1500));
-}
-
 export function TasksContainer({ children }: PropTypes) {
   const [loading, setLoading] = useState(false);
   const [isPending, startTransition] = useTransition();
@@ -41,12 +37,23 @@ export function TasksContainer({ children }: PropTypes) {
 
   const onLoad = async () => {
     setLoading(true);
-    await sleep();
-    startTransition(() => {
-      dispatch({ type: "step", payload: "success" });
-      setLoading(false);
+    const res = await fetch("/api/send-email", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ data: state.checks })
     });
+    if (res.ok) {
+      startTransition(() => {
+        dispatch({ type: "step", payload: "success" });
+        setLoading(false);
+      });
+    }
   };
+
+  const canSubmit = state.checks.every(check => {
+    if (check.condition === "good") return true;
+    return check.notification?.resolved !== undefined && check.notification?.person;
+  });
 
   return (
     <>
@@ -60,15 +67,11 @@ export function TasksContainer({ children }: PropTypes) {
                     condition={check.condition}
                     id={check.id}
                     conditions={check.conditions}
-                    taskDescription={check.description}
                     onCondition={(id, condition) => {
                       dispatch({ type: "condition", payload: { id, condition } });
                     }}
                     key={index}
                     title={check.name || ""}
-                    onDescription={(id, description) =>
-                      dispatch({ type: "description", payload: { id, description } })
-                    }
                   />
                 );
               })}
@@ -91,10 +94,16 @@ export function TasksContainer({ children }: PropTypes) {
                 {state.checks.map(check => {
                   return (
                     <SummaryCard
+                      onPerson={person => dispatch({ type: "person", payload: { person, id: check.id } })}
+                      onResolved={resolved =>
+                        dispatch({
+                          type: "resolved",
+                          payload: { id: check.id, resolved: resolved === "yes" }
+                        })
+                      }
                       condition={check.condition}
                       key={check.id}
                       title={check.name || ""}
-                      description={check.description}
                     />
                   );
                 })}
@@ -113,6 +122,7 @@ export function TasksContainer({ children }: PropTypes) {
                 <Button
                   onClick={onLoad}
                   loading={loading || isPending}
+                  disabled={!canSubmit}
                   fullWidth
                   size="sm"
                   className="rounded-full mt-6 grow group relative"
